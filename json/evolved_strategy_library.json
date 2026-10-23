@@ -1,0 +1,10 @@
+{
+    "macro_shortcuts": {
+        "level_1_canonical": {
+            "discovered_by_agent": 0,
+            "record_latency_us": 47.0,
+            "optimal_turns": 1,
+            "discovered_at_gen": 139
+        }
+    }
+}

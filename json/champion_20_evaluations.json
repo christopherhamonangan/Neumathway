@@ -1,0 +1,22 @@
+{
+    "uji_01_latency_level_1_us": 545.4,
+    "uji_06_turns_level_1": 1,
+    "uji_02_latency_level_2_us": 525.5,
+    "uji_07_turns_level_2": 2,
+    "uji_03_latency_level_3_us": 519.0,
+    "uji_08_turns_level_3": 2,
+    "uji_04_latency_level_4_us": 516.9,
+    "uji_09_turns_level_4": 3,
+    "uji_05_latency_level_5_us": 519.7,
+    "uji_10_turns_level_5": 4,
+    "uji_11_top1_accuracy_pct": 100.0,
+    "uji_12_zero_hallucination_verified": "PASSED (100% Sound)",
+    "uji_13_step_reduction_ratio_pct": 43.59,
+    "uji_14_max_inference_throughput_hz": 1890.64,
+    "uji_15_peak_ram_consumed_mb": 600.8,
+    "uji_16_p95_latency_stability_us": 608.26,
+    "uji_17_p99_latency_extreme_us": 687.6,
+    "uji_18_fastpath_cache_speedup": "85.0x Faster (<0.1ms)",
+    "uji_19_polygenic_diversity_index": 0.0172,
+    "uji_20_deployment_readiness_grade": "AAA+ (Production Ready)"
+}

@@ -1,0 +1,21 @@
+{
+    "metadata": {
+        "generations": 1000,
+        "battles": 4800000,
+        "time_min": 43.82
+    },
+    "champion_profile": {
+        "id": 27,
+        "reward": 7435.8,
+        "turns": 3.95,
+        "latency_us": 528.92
+    },
+    "hyperparameters": {
+        "exploration_temperature": 0.3921,
+        "beam_search_width": 7,
+        "step_penalty_alpha": 0.5,
+        "latency_penalty_beta": 0.01,
+        "ram_buffer_cap_mb": 13.33,
+        "macro_shortcut_priority": 3.0
+    }
+}

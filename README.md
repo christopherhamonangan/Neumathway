@@ -441,7 +441,7 @@ See the [LICENSE](LICENSE) file for the complete license terms.
 
 ## Author
 
-**Christopher Hamonangan**
+**Christopher Alberto Hamonangan**
 
 Independent AI Researcher
 

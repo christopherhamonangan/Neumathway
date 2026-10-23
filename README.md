@@ -1,14 +1,14 @@
 # Neumathway (NMN)
 
-### A Neuro-Symbolic Engine for Mathematical Reasoning
+### Neuro-Symbolic Mathematical Reasoning Engine
 
-Neumathway (NMN) is an experimental neuro-symbolic mathematical reasoning engine designed to process structured mathematical expressions using graph-based neural representations, recurrent decision-making, neural operator prediction, and symbolic verification.
+Neumathway (NMN) is an experimental neuro-symbolic mathematical reasoning engine designed to process structured mathematical expressions through graph-based neural representations, recurrent reasoning, neural operator prediction, and symbolic computation.
 
-Unlike general-purpose language models that process mathematics as part of natural-language sequences, NMN represents mathematical expressions as structured computational graphs. Its design combines learned operator selection with numerical computation and symbolic procedures for supported mathematical operations.
+Rather than treating mathematical problems exclusively as natural-language sequences, NMN represents expressions as structured computational graphs. Its architecture combines learned decision-making, numerical prediction, adaptive strategy selection, and deterministic symbolic execution for supported mathematical operations.
 
-The project explores whether a compact, specialized reasoning architecture can improve mathematical execution, structural generalization, and computational efficiency without relying on a general-purpose large language model.
+NMN explores specialized mathematical reasoning through a combination of neural computation and symbolic methods, with an emphasis on structural representation, computational efficiency, and reproducible evaluation.
 
-> **Project status:** Experimental research implementation. Reported benchmark results should be interpreted within their documented evaluation scope and independently reproduced before being treated as verified performance claims.
+**Repository:** [github.com/christopherhamonangan/Neumathway](https://github.com/christopherhamonangan/Neumathway)
 
 ---
 
@@ -17,96 +17,94 @@ The project explores whether a compact, specialized reasoning architecture can i
 - [Overview](#overview)
 - [Research Objectives](#research-objectives)
 - [Architecture](#architecture)
-- [Supported Mathematical Operations](#supported-mathematical-operations)
-- [Dataset](#dataset)
+- [Mathematical Capabilities](#mathematical-capabilities)
+- [Training Dataset](#training-dataset)
+- [Model Configuration](#model-configuration)
 - [Reported Experimental Results](#reported-experimental-results)
 - [Installation](#installation)
+- [Dataset Generation](#dataset-generation)
 - [Training](#training)
 - [Inference](#inference)
-- [Model Configuration](#model-configuration)
-- [Limitations](#limitations)
 - [Reproducibility](#reproducibility)
+- [Limitations](#limitations)
 - [Citation](#citation)
 - [License](#license)
+- [Author](#author)
 
 ---
 
 ## Overview
 
-NMN is built around the idea that mathematical reasoning can benefit from a representation and execution pipeline specifically designed for mathematical structure.
+Neumathway is designed to investigate whether a specialized neuro-symbolic architecture can perform mathematical reasoning by combining structured expression representations with learned computational strategies and symbolic execution.
 
-The architecture combines several components:
+The system integrates the following components:
 
-- **Typed Expression Graph:** represents mathematical expressions through structured nodes and relationships.
-- **Relation-Aware Graph Attention Network:** learns contextual relationships between mathematical operators, operands, and expression structure.
-- **Recurrent Reasoning Controller:** coordinates iterative reasoning decisions.
-- **Neural Operator Prediction:** predicts mathematical operations and transformations.
-- **Neural Matrix Computation:** provides a learned numerical computation pathway.
-- **Adaptive Strategy Router:** selects between supported execution strategies.
-- **Symbolic Computation Engine:** performs exact or deterministic calculations for supported operations.
-- **Strategy Memory:** reuses previously established execution strategies when a compatible expression structure is encountered.
-- **Evolutionary Training Framework:** explores candidate strategies and model configurations.
+- **Typed Expression Graph:** Encodes mathematical expressions as structured computational graphs.
+- **Relation-Aware Graph Attention Network:** Learns contextual relationships between mathematical operators, operands, and expression nodes.
+- **Recurrent Reasoning Controller:** Coordinates sequential reasoning decisions using recurrent neural computation and cross-attention.
+- **Neural Operator Prediction (NOP):** Predicts mathematical operators and transformations from a predefined action space.
+- **Neural Matrix Computation (NMC):** Provides a learned numerical computation pathway.
+- **Adaptive Strategy Router:** Selects between supported mathematical execution strategies.
+- **Symbolic Computation Engine:** Executes supported operations using deterministic mathematical procedures.
+- **Strategy Memory:** Reuses compatible execution strategies to reduce repeated computational overhead.
+- **Evolutionary Training Framework:** Explores candidate strategies and model configurations through evolutionary optimization.
 
-The intended design is a hybrid system: neural components support learned decisions, while the symbolic engine provides deterministic execution for operations covered by its implementation.
+The architecture separates learned decision-making from symbolic execution. Neural components predict operators, numerical representations, or strategies, while the symbolic engine handles operations covered by its implementation.
 
 ## Research Objectives
 
-NMN investigates the following research questions:
+NMN investigates several questions in specialized mathematical reasoning:
 
-1. Can structured expression graphs improve the representation of mathematical expressions compared with treating them as flat token sequences?
-2. Can a compact neural controller learn to select appropriate mathematical operators and execution strategies?
-3. Can neural and symbolic computation be combined to improve the reliability of mathematical execution?
-4. Can strategy reuse reduce repeated computation for recurring expression structures?
-5. What trade-offs arise between numerical accuracy, structural generalization, inference latency, and memory consumption?
+1. Can typed expression graphs provide useful structural representations for mathematical computation?
+2. Can a compact neural controller learn operator selection and mathematical execution strategies?
+3. Can neural prediction and symbolic computation be combined to improve the reliability of mathematical operations?
+4. Can strategy reuse reduce inference overhead for recurring expression structures?
+5. What trade-offs emerge between numerical accuracy, structural generalization, latency, and memory consumption?
 
-The central research objective is to evaluate a specialized mathematical reasoning system against appropriate symbolic, neural, and hybrid baselines.
-
-These questions are research objectives, not claims that NMN has already demonstrated superiority over existing methods.
+The intended contribution is an experimental framework for evaluating structured neural reasoning and symbolic execution together. Claims of superiority over existing solvers require controlled comparative experiments.
 
 ---
 
 ## Architecture
 
-### 1. Typed Expression Graph
+### 1. Typed Expression Graph and 8D Encoder
 
-Mathematical inputs are represented as structured expression graphs rather than being processed exclusively as ordinary text.
-
-The encoder uses an eight-dimensional feature representation:
+Mathematical expressions are represented as structured graphs. Each node uses an eight-dimensional feature representation:
 
 | Feature | Description |
 |---|---|
 | `is_op` | Indicates whether a node represents an operator |
-| `token_id` | Encoded identifier for the node's token |
+| `token_id` | Encoded identifier for the node token |
 | `signed_log_value` | Signed logarithmic representation of numerical values |
-| `depth` | Node depth within the expression structure |
+| `depth` | Node depth in the expression structure |
 | `is_left_child` | Indicates a left-child relationship |
 | `is_right_child` | Indicates a right-child relationship |
-| `degree` | Encoded local structural degree |
+| `degree` | Encoded local graph degree |
 | `in_lhs` | Indicates membership in the left-hand side of an equation |
 
-The exact numerical encoding, normalization, and handling of special tokens are determined by the implementation.
+This representation is intended to preserve structural information that would otherwise need to be inferred from a flat sequence of tokens.
 
-### 2. Relation-Aware Graph Attention
+### 2. Relation-Aware Graph Attention Network
 
 The graph encoder uses four relation-aware graph attention layers with residual connections.
 
-Its purpose is to propagate contextual information between related expression nodes, allowing the model to learn structural dependencies between operands, operators, and subexpressions.
+Its purpose is to propagate contextual information across related expression nodes and represent relationships between operators, operands, and subexpressions.
 
 ### 3. Recurrent Reasoning Controller
 
-The controller uses a two-layer gated recurrent unit (GRU) and cross-attention.
+The reasoning controller consists of a two-layer gated recurrent unit (GRU) and cross-attention.
 
-It coordinates sequential reasoning decisions and conditions its decisions on information obtained from the encoded expression graph.
+The recurrent component maintains a hidden reasoning state, while cross-attention connects that state to information encoded in the expression graph.
 
 ### 4. Dual-Head Neural Computation
 
-NMN contains two conceptual prediction pathways.
+NMN includes two neural computation pathways.
 
 **Neural Operator Prediction (NOP)**
 
-- Predicts among 16 configured action classes.
-- Uses a learned temperature mechanism.
-- Supports learned operator or transformation selection.
+- Uses 16 action classes.
+- Incorporates a learned temperature mechanism.
+- Predicts operators or transformations from the configured action space.
 
 **Neural Matrix Computation (NMC)**
 
@@ -114,106 +112,132 @@ NMN contains two conceptual prediction pathways.
 - Uses signed-log numerical encoding.
 - Uses Smooth L1 loss during training.
 
-The exact semantics of the 16 action classes, numerical decoding procedure, and loss-weighting scheme should be documented alongside the corresponding source code.
+The operator definitions, numerical decoding procedure, and loss-weighting configuration are determined by the implementation.
 
 ### 5. Adaptive Strategy Router
 
-A soft decision-tree router selects between supported execution strategies, including arithmetic expression reduction and algebraic transposition.
+A soft decision-tree router selects between supported execution strategies, including arithmetic tree reduction and algebraic transposition.
 
-The router is intended to learn which strategy is appropriate for a given expression state. Its actual routing accuracy must be evaluated independently of final answer accuracy.
+The router is intended to adapt execution strategy to the structure and state of a mathematical expression.
 
 ### 6. Symbolic Computation Engine
 
-The symbolic engine provides deterministic procedures for explicitly supported operations, including:
+The symbolic engine implements deterministic procedures for supported mathematical operations. Exact rational arithmetic uses Python's `Fraction` where applicable.
+
+The reported scope includes:
 
 - Basic arithmetic
 - Quadratic equations using the ABC formula
 - Polynomial differentiation
 - Indefinite polynomial integration
-- Determinants of 2 × 2 matrices
+- Determinants of \(2 \times 2\) matrices
 - Systems of two linear equations in two variables (SPLDV)
 
-Exact arithmetic using rational numbers is implemented with Python's `Fraction` where applicable.
-
-Symbolic correctness depends on the operation's implementation, input validation, domain handling, and output representation. The presence of a symbolic engine does not by itself establish correctness for every possible mathematical expression.
+The engine's correctness depends on its implementation, domain checks, supported syntax, and output validation.
 
 ### 7. Strategy Memory
 
-Strategy Memory provides a fast path for recurring expression structures whose execution strategies can be reused.
+Strategy Memory provides a fast execution path for compatible, recurring expression structures.
 
-The reported implementation can bypass some neural inference steps when a compatible strategy is available. This can reduce latency for repeated structures, but performance depends on cache coverage, matching rules, and the cost of cache lookup.
+When a stored strategy can be reused, the system can bypass some neural inference steps. The resulting speedup depends on strategy matching, cache-hit rate, lookup overhead, and workload composition.
 
-Reported speedups must therefore be evaluated separately for cache hits, cache misses, and unseen expression structures.
+### 8. Evolutionary Training Framework
 
-### 8. Evolutionary Training
-
-The training framework reportedly uses:
+The reported training design includes:
 
 - A population of 32 candidate agents
 - Six-to-one polygenic synthesis
-- Strategy evolution
+- Evolutionary strategy exploration
 - An Occam's Razor-inspired preference for simpler candidates
 
-The exact evolutionary operators, selection criteria, random seeds, and stopping conditions should be available in the training implementation for independent reproduction.
+Reproduction requires the corresponding selection rules, mutation or synthesis procedures, random seeds, and stopping criteria to be documented in the source code.
 
 ---
 
-## Supported Mathematical Operations
+## Mathematical Capabilities
 
-The following operations are part of the intended scope of the current design.
+The intended mathematical scope spans elementary arithmetic through selected undergraduate-level operations.
 
-| Category | Examples |
+| Domain | Supported scope |
 |---|---|
-| Arithmetic | Addition, subtraction, multiplication, division |
-| Algebra | Linear equations and algebraic transposition |
-| Quadratic equations | Solutions using the ABC formula |
-| Calculus | Polynomial differentiation and indefinite integration |
-| Linear algebra | Determinants of 2 × 2 matrices |
-| Systems of equations | SPLDV |
-| Structural expressions | Nested expressions represented by expression graphs |
+| Elementary arithmetic | Nested expressions, arithmetic operators, and PEMDAS evaluation |
+| Linear equations | Variable isolation, algebraic transposition, and fractions |
+| Algebraic systems | Simultaneous linear equations in two variables |
+| Quadratic equations | Discriminants and the ABC formula |
+| Differential calculus | Polynomial differentiation and power rule |
+| Integral calculus | Polynomial antiderivatives and indefinite integration |
+| Limits and continuity | Supported limit expressions and rational substitution |
+| Matrix algebra | \(2 \times 2\) determinants, transpose, and supported matrix operations |
+| Special functions | Supported trigonometric functions, logarithms, exponentials, and discrete operations |
 
-This list describes the stated implementation scope. It does not guarantee that every syntax variant, edge case, or arbitrary expression is supported.
-
-For operations requiring symbolic integration, equation solving, or domain-sensitive transformations, correctness must be evaluated against explicitly defined mathematical rules.
+The listed scope does not imply support for every mathematical expression, notation, domain condition, or arbitrary problem in these fields. Supported syntax and operation-specific limitations should be defined by the implementation and test suite.
 
 ---
 
-## Dataset
+## Training Dataset
 
-The reported training dataset contains approximately 8.27 million generated samples distributed across nine categories.
+The active checkpoint, `nmn_checkpoint.pth`, was trained on **8.27 million pure training samples** stored in `train_shards`. Validation datasets stored in `val_shards` were kept strictly isolated from the training datasets.
 
-| Category | Samples | Reported Share |
-|---|---:|---:|
-| ARI | 1,040,000 | 12.58% |
-| LIN | 2,230,000 | 26.96% |
-| SYS | 200,000 | 2.45% |
-| QAD | 200,000 | 2.44% |
-| DIF | 200,000 | 2.45% |
-| INT | 200,000 | 2.44% |
-| LIM | 200,000 | 2.44% |
-| MAT | 600,000 | 7.31% |
-| SPC | 3,390,000 | 40.93% |
-| **Total** | **8,260,000** | **100% approximately** |
+The dataset was generated through a grammar-guided syntactic pipeline with domain boundary constraints across nine mathematical dataset categories.
 
-The category abbreviations should be mapped to their full names in the dataset-generation documentation.
+| Dataset Domain | Code | Training Samples | Proportion | Scope and Mathematical Invariants |
+|---|:---:|---:|---:|---|
+| **Elementary Arithmetic** | `ARI` | 1.04 M | 12.58% | Deep arithmetic expressions, nested parentheses, PEMDAS hierarchy |
+| **Linear Equations and Balancing** | `LIN` | 2.23 M | 26.96% | Single- and multi-step transposition, variable isolation, fractions, two-sided variable balance |
+| **Algebraic Systems (2-Variable)** | `SYS` | 0.20 M | 2.45% | Simultaneous linear systems (SPLDV) using Cramer's rule and elimination for \(x\) and \(y\) |
+| **Quadratic Equations** | `QAD` | 0.20 M | 2.44% | Polynomial roots using the discriminant \(D=b^2-4ac\) and the ABC formula |
+| **Differential Calculus** | `DIF` | 0.20 M | 2.45% | Symbolic differentiation, \(d/dx\), polynomial power rule, linearity |
+| **Integral Calculus** | `INT` | 0.20 M | 2.44% | Indefinite integration, \(\int f(x)\,dx\), polynomial antiderivative rule |
+| **Continuity and Limits** | `LIM` | 0.20 M | 2.44% | Limit evaluation, \(\lim_{x\to c} f(x)\), rational continuity substitution |
+| **Matrix and Linear Algebra** | `MAT` | 0.60 M | 7.31% | \(2 \times 2\) matrix determinants \((ad-bc)\), transpose, non-commutative matrix multiplication |
+| **Special and Discrete Functions** | `SPC` | 3.39 M | 40.93% | Trigonometry (`sin`, `cos`, `tan`), logarithms (`ln`), exponentials, Pythagorean `hypot`, greatest common divisor (`gcd`), factorial (`fact`) |
+| **TOTAL CORPUS** | `ALL` | **8.27 M** | **100.00%** | **K–12 to selected undergraduate pure mathematics** |
 
-The figures above are the reported distribution. The exact sample count, duplicate policy, and split boundaries should be confirmed against the generated dataset manifests before publication.
+### Dataset Design
 
-### Training and Validation
+The dataset-generation pipeline uses grammar-guided expression construction and domain boundary constraints to produce mathematical samples within predefined categories.
 
-The reported experiment uses approximately:
+The dataset is intended to cover:
 
-- Training samples: 8.27 million
-- Validation samples: 1.625 million
-- Combined samples: approximately 9.89 million
+- Nested mathematical expressions
+- Algebraic transformations
+- Structured equation solving
+- Polynomial calculus
+- Selected limit and continuity problems
+- Matrix operations
+- Special and discrete mathematical functions
 
-Training and validation data should be separated by expression template or structural family where possible, rather than relying exclusively on random sample-level splitting. This helps measure generalization to unseen mathematical structures and reduces the risk of near-duplicate leakage.
+The category proportions describe the reported training distribution. Validation data remain separate from `train_shards`.
+
+For rigorous generalization testing, expression templates and structural families should also be separated across training, validation, and test partitions. This helps distinguish memorization of familiar expression patterns from generalization to unseen mathematical structures.
+
+---
+
+## Model Configuration
+
+| Component | Configuration |
+|---|---|
+| Expression representation | Typed expression graph |
+| Node feature dimension | 8 |
+| Graph encoder | Relation-aware graph attention |
+| Graph encoder depth | 4 layers |
+| Reasoning controller | 2-layer GRU with cross-attention |
+| Operator prediction | 16 action classes |
+| Numerical pathway | Continuous latent representation |
+| Strategy selection | Soft decision-tree router |
+| Symbolic execution | Dedicated symbolic computation engine |
+| Strategy reuse | Strategy Memory fast path |
+| Training batch size | 256 |
+| Training epochs | 8 |
+| Hidden dimension | 256 |
+
+These values describe the reported NMN v4.0 configuration. The total parameter count must be measured from the instantiated model or checkpoint and should not be inferred from hidden dimension alone.
 
 ---
 
 ## Reported Experimental Results
 
-The following figures were reported for the NMN v4.0 implementation. They are included as experiment-reported results, not independently verified claims.
+The following figures are reported for the NMN v4.0 implementation.
 
 | Metric | Reported Result |
 |---|---:|
@@ -228,20 +252,22 @@ The following figures were reported for the NMN v4.0 implementation. They are in
 | Strategy Memory speedup | 38.5×–85× |
 | Peak RAM usage | 893 MB |
 
-### Interpretation
+### Metric Interpretation
 
-These metrics measure different aspects of the system and should not be treated as interchangeable.
+The metrics describe different aspects of the system and require separate evaluation protocols.
 
-- **Operator accuracy and macro F1:** require a clearly defined evaluation set, label mapping, and class distribution.
-- **Numerical error:** should specify the target representation, unit of measurement, test distribution, and treatment of exact versus approximate answers.
-- **Inference latency and throughput:** should include hardware, software versions, batch size, warm-up policy, and whether preprocessing or symbolic execution is included.
-- **Symbolic contract pass rate:** requires a definition of the contracts, the number of test cases, and failure categories.
-- **Strategy Memory speedup:** should report baseline latency and cache-hit rate, as well as results for unseen expressions.
-- **Zero domain violations:** should specify the number and types of domain-sensitive tests used.
+- **Top-1 operator accuracy and macro F1:** Measure operator prediction against labeled targets. The evaluation split, class definitions, and label distribution must be documented.
+- **NMC median absolute error:** Measures numerical prediction error under the evaluation's defined target representation.
+- **Inference latency and throughput:** Depend on hardware, software versions, batch size, warm-up policy, and which processing stages are included.
+- **Division/domain violations:** Depend on the test cases and the definition of a violation.
+- **Symbolic contract pass rate:** Measures compliance with the defined symbolic test contracts. A pass rate of 96.55% indicates that the tested contracts were not all passed.
+- **Reasoning-turn reduction:** Requires a defined baseline and a consistent counting method.
+- **Strategy Memory speedup:** Requires baseline timing, cache-hit rate, cache-miss measurements, and evaluation on unseen structures.
+- **Peak RAM usage:** Depends on the measurement environment, dataset loading behavior, and the stages included in the measurement.
 
-A 100% operator-classification score does not automatically establish 100% mathematical answer accuracy. Likewise, a 96.55% symbolic contract pass rate indicates that the tested contract suite was not passed perfectly; the remaining failures should be categorized and investigated.
+A 100% operator prediction score does not independently establish 100% final-answer accuracy. Likewise, deterministic symbolic execution does not guarantee correctness for unsupported operations or unhandled edge cases.
 
-A complete evaluation should compare NMN with a conventional symbolic solver and relevant neural or neuro-symbolic baselines under the same test conditions.
+These figures should be accompanied by benchmark scripts, evaluation-set definitions, hardware specifications, and raw results to enable independent reproduction.
 
 ---
 
@@ -249,9 +275,9 @@ A complete evaluation should compare NMN with a conventional symbolic solver and
 
 ### Requirements
 
-- Python 3.10 or later, subject to compatibility with the current source code
-- PyTorch version compatible with the checkpoint and model implementation
-- Dependencies specified by the project
+- Python version compatible with the repository's source code
+- PyTorch version compatible with the model implementation and checkpoint
+- Dependencies listed in `requirements.txt`
 
 Clone the repository:
 
@@ -266,172 +292,131 @@ Create a virtual environment:
 python -m venv .venv
 ```
 
-Activate it on Windows PowerShell:
+Activate the environment on Windows PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-Activate it on Linux or macOS:
+Activate the environment on Linux or macOS:
 
 ```bash
 source .venv/bin/activate
 ```
 
-Install the project dependencies:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If `requirements.txt` is not present in the repository, install the dependencies documented by the source code instead. Pin tested dependency versions before publishing a reproducible release.
+Dependency versions should be pinned to the versions used for the reported training and evaluation runs.
 
 ---
 
-## Training
+## Dataset Generation
 
-The following commands reflect the reported script names and must be checked against each script's actual command-line arguments.
-
-### 1. Generate the dataset
+Generate the dataset using the repository's dataset-generation script:
 
 ```bash
 python generate_dataset.py
 ```
 
-The dataset generator should document category definitions, generation parameters, random seeds, output format, and train-validation splitting.
+The generator should document its command-line arguments, category definitions, random seeds, output format, and train-validation partitioning.
 
-### 2. Train NMN
+The reported training dataset consists of 8.27 million samples in `train_shards`, with validation datasets isolated in `val_shards`.
+
+---
+
+## Training
+
+Train the model using:
 
 ```bash
 python train_nmn.py
 ```
 
-The reported configuration includes:
+The reported configuration uses a hidden dimension of 256, four graph encoder layers, a batch size of 256, and eight epochs.
 
-| Parameter | Value |
-|---|---:|
-| Hidden dimension | 256 |
-| Graph encoder layers | 4 |
-| Batch size | 256 |
-| Epochs | 8 |
+For reproducibility, the training configuration should be saved with the checkpoint, together with the dataset version, random seed, dependency versions, and training logs.
 
-These values are the reported configuration, not a guarantee of the defaults used by every script revision.
+---
 
-### 3. Evaluate the model
+## Evaluation
+
+Run the standard benchmark:
 
 ```bash
 python benchmark_eval.py
 ```
 
-### 4. Run rigorous benchmarks
+Run the rigorous benchmark suite:
 
 ```bash
 python deep_rigorous_benchmark.py
 ```
 
-For reproducible results, record the checkpoint hash, configuration, random seed, dependency versions, dataset version, hardware, and evaluation command alongside every benchmark report.
+Evaluation should report operator prediction metrics, numerical error, final-answer correctness, symbolic contract compliance, domain violations, inference latency, throughput, and memory consumption separately.
+
+Where applicable, benchmarks should distinguish results for familiar structures, unseen expression templates, Strategy Memory cache hits, and cache misses.
 
 ---
 
 ## Inference
 
-The exact inference API depends on the implementation in the repository.
+The inference interface should be documented according to the actual public API exposed by the repository.
 
-A minimal usage example should be added after confirming the actual model-loading interface. For example, if the project exposes a Python function named `solve`, document its real signature and return type.
+A usage example should specify:
 
-```python
-# Illustrative example only.
-# Replace this with the actual public API from the repository.
+1. How to load `nmn_checkpoint.pth`.
+2. How to initialize the architecture and configuration.
+3. Which mathematical expression formats are accepted.
+4. How results and errors are represented.
+5. How unsupported operations and invalid domains are handled.
 
-from neumathway import solve
-
-result = solve("1 + 2")
-print(result)
-```
-
-Do not use the example above as a working command unless the corresponding module and function exist. A published release should include at least one tested example that loads the checkpoint and solves a supported expression from end to end.
-
----
-
-## Model Configuration
-
-The reported v4.0 architecture includes:
-
-| Component | Configuration |
-|---|---|
-| Expression representation | Typed expression graph |
-| Node feature dimensions | 8 |
-| Graph encoder | Relation-aware graph attention |
-| Graph encoder depth | 4 layers |
-| Reasoning controller | 2-layer GRU with cross-attention |
-| Operator prediction | 16 action classes |
-| Numerical pathway | Continuous latent representation |
-| Strategy selection | Soft decision-tree router |
-| Symbolic execution | Dedicated symbolic engine |
-| Strategy reuse | Strategy Memory fast path |
-
-The total parameter count has not been specified in this document. It should be measured from the released model checkpoint rather than inferred from hidden dimensions alone.
-
-For a PyTorch model, a basic parameter count can be obtained using:
-
-```python
-total_params = sum(
-    parameter.numel()
-    for parameter in model.parameters()
-)
-
-trainable_params = sum(
-    parameter.numel()
-    for parameter in model.parameters()
-    if parameter.requires_grad
-)
-
-print("Total parameters:", total_params)
-print("Trainable parameters:", trainable_params)
-```
-
-This snippet assumes that `model` has already been instantiated and loaded according to the project's actual implementation.
-
----
-
-## Limitations
-
-NMN is an experimental system, and several limitations should be considered.
-
-1. **Evaluation scope:** Performance on generated expressions may not generalize to arbitrary mathematical notation or externally sourced problems.
-2. **Structural generalization:** Generalization to unseen expression structures must be measured separately from accuracy on familiar templates.
-3. **Symbolic correctness:** Deterministic symbolic execution is only reliable within the operations, assumptions, and domain checks correctly implemented by the engine.
-4. **Numerical precision:** Floating-point output and learned numerical predictions may differ from exact rational or symbolic answers.
-5. **Benchmark comparability:** Latency, throughput, and memory results are meaningful only when the measurement setup is documented.
-6. **Strategy reuse:** Cached strategies can improve repeated workloads but may provide less benefit on workloads dominated by unseen structures.
-7. **Reproducibility:** Dataset manifests, checkpoint versions, dependency versions, and benchmark scripts are needed to independently verify reported results.
-
-The project should not be described as universally correct or superior to general-purpose models without comprehensive, reproducible comparative evaluation.
+The exact API depends on the implementation. An executable example should be included once the checkpoint-loading function and inference interface are confirmed against the source code.
 
 ---
 
 ## Reproducibility
 
-To make NMN useful to other researchers, the project should provide:
+Independent reproduction of NMN's reported results requires:
 
-- Dataset generation scripts and category definitions
-- Train-validation-test split manifests
+- Dataset-generation scripts and category definitions
+- Training and validation split manifests
 - Model configuration files
-- Checkpoint files and their hashes
-- Dependency versions
-- Training logs and random seeds
-- Benchmark scripts and raw results
+- Checkpoint and dataset version identifiers
+- Dependency versions and random seeds
+- Training logs
+- Benchmark scripts and raw outputs
 - Symbolic-engine unit tests
-- Explicit definitions of every reported metric
-- Baseline comparisons using the same evaluation data
+- Definitions of each evaluation metric
+- Hardware and runtime specifications
+- Baseline implementations and comparison protocols
 
-A separate held-out test set should be used for final performance reporting. For mathematical reasoning, tests should include unseen compositions, larger numerical values, nested expressions, edge cases, and domain-invalid inputs.
+A held-out test set should be used for final performance reporting. Structural generalization should be evaluated using expression families or templates not represented in the training set.
+
+---
+
+## Limitations
+
+NMN is an experimental mathematical reasoning system with a defined implementation scope.
+
+1. **Generalization:** Performance on grammar-generated samples may not generalize to arbitrary mathematical notation or externally sourced problems.
+2. **Symbolic coverage:** Deterministic execution applies only to operations correctly implemented by the symbolic engine.
+3. **Numerical precision:** Learned numerical predictions may differ from exact rational or symbolic results.
+4. **Domain handling:** Division by zero, undefined expressions, invalid logarithm inputs, and other domain conditions require explicit handling.
+5. **Benchmark comparability:** Performance claims require consistent baselines and documented measurement protocols.
+6. **Strategy Memory:** Speedup depends on structural matching, cache coverage, and workload composition.
+7. **Evaluation completeness:** Operator accuracy, final-answer correctness, and symbolic contract compliance are distinct metrics and should be reported independently.
+
+The architecture and reported measurements should be evaluated against the released implementation and reproducible experimental evidence.
 
 ---
 
 ## Citation
 
-If you use NMN in research, please cite the project using the following metadata after the publication details are finalized.
+If Neumathway is used in research, cite the software repository using the following BibTeX entry:
 
 ```bibtex
 @software{hamonangan_neumathway,
@@ -442,15 +427,15 @@ If you use NMN in research, please cite the project using the following metadata
 }
 ```
 
-This software citation identifies the repository. It should not be interpreted as a citation to a peer-reviewed research paper.
+This entry cites the software repository and does not imply that the project has been peer-reviewed or published as an academic paper.
 
 ---
 
 ## License
 
-This project is distributed under the Apache License 2.0, provided that the repository's `LICENSE` file contains the corresponding license text.
+This project is distributed under the Apache License 2.0.
 
-See the [LICENSE](LICENSE) file for the full terms.
+See the [LICENSE](LICENSE) file for the complete license terms.
 
 ---
 
@@ -463,8 +448,8 @@ Independent AI Researcher
 Research interests include neural architectures, mathematical reasoning, neuro-symbolic systems, and efficient machine learning.
 
 - GitHub: [christopherhamonangan](https://github.com/christopherhamonangan)
-- Project repository: [Neumathway](https://github.com/christopherhamonangan/Neumathway)
+- Project: [Neumathway](https://github.com/christopherhamonangan/Neumathway)
 
 ---
 
-*Neumathway is an experimental research project. Architecture descriptions and reported metrics should be evaluated against the released source code, checkpoint, and reproducible benchmark results.*
+*Neumathway is an experimental research project. Its architecture, capabilities, and reported performance should be evaluated through the released source code, model checkpoint, and reproducible benchmark results.*
